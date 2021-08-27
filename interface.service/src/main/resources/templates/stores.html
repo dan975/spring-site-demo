@@ -1,0 +1,76 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" th:include="layouts/commonLayout :: common-layout">
+<body>
+    <div th:fragment="content">
+        <script>
+            let map;
+
+            function initMap() {
+                  const lisbon = { lat: 38.72232363838995, lng: -9.138986949798861 };
+
+                  const map = new google.maps.Map(document.getElementById("map"), {
+                    zoom: 13,
+                    center: lisbon,
+                  });
+
+                  var storeLocations = [
+                    { lat: 38.7159762705534, lng: -9.146949634060997},
+                    { lat: 38.711522632703876, lng: -9.138538226153987},
+                    { lat: 38.723054721886605, lng: -9.134309079425808},
+                    { lat: 38.733404708506626, lng: -9.153587703524742}
+                  ];
+                  storeLocations.forEach(store => {
+                      const marker = new google.maps.Marker({
+                        position: store,
+                        map: map
+                      });
+                  });
+            }
+        </script>
+        <h1>Store contacts</h1>
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">Address</th>
+                    <th scope="col">Work hours</th>
+                    <th scope="col">Phone</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1 Street St</td>
+                    <td>I-V 10:00-21:00, VI-VII 10:00 - 18:00</td>
+                    <td><a href="tel:123-456-789" class="text-reset text-decoration-none font-weight-bold">123-456-789</a></td>
+                </tr>
+                <tr>
+                    <td>2 Street St</td>
+                    <td>I-V 10:00-21:00, VI-VII 10:00 - 18:00</td>
+                    <td><a href="tel:123-456-789" class="text-reset text-decoration-none font-weight-bold">123-456-789</a></td>
+                </tr>
+                <tr>
+                    <td>3 Street St</td>
+                    <td>I-V 10:00-21:00, VI-VII 10:00 - 20:00</td>
+                    <td><a href="tel:123-456-789" class="text-reset text-decoration-none font-weight-bold">123-456-789</a></td>
+                </tr>
+                <tr>
+                    <td>
+                        <span style="vertical-align: middle;" class="pr-1">4 Street St</span>
+                        <span class="badge badge-danger" style="vertical-align: middle;">New!</span>
+                    </td>
+                    <td>I-V 10:00-21:00, VI-VII 10:00 - 20:00</td>
+                    <td><a href="tel:123-456-789" class="text-reset text-decoration-none font-weight-bold">123-456-789</a></td>
+                </tr>
+            </tbody>
+        </table>
+        <h1>Store map</h1>
+        <div class="row d-flex justify-content-center">
+            <div class="col-md-9 flex-shrink-1">
+                <div id="map" style="width: 100%; height: 300px;"></div>
+            </div>
+        </div>
+
+        <script async
+                th:src="'https://maps.googleapis.com/maps/api/js?key=' + ${googleApiKey} + '&callback=initMap'">
+        </script>
+        </div>
+</html>

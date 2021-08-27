@@ -1,0 +1,140 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" th:include="layouts/commonLayout :: common-layout">
+<body>
+<div th:fragment="content">
+    <div th:replace="fragments/breadCrumbs :: breadcrumb"></div>
+    <div th:replace="fragments/categoryNav :: nav"></div>
+    <div class="d-flex justify-content-end">
+        <div class="col-md-8 px-0" id="cart">
+            <div th:replace="fragments/cart/cart :: cartMenu">Cart</div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <div id="categorySidePanel">
+                <div class="categoryToggle pt-2">
+                    <div data-toggle="collapse" class="h6 bg-dark text-white text-center py-2 m-0" href="#collapse1">
+                        <i class="fas fa-search"></i>
+                        Filter
+                    </div>
+                    <div id="collapse1" class="collapse col show">
+                        <div>
+                            <div class="row">
+                                <b class="w-100">Size</b>
+                                <ul id="sizeList" class="list-unstyled">
+                                    <li th:each="size, stat: ${sizes}"><input type="checkbox" onclick="filterCategories()"/><span class="ml-1" th:text="${size}">S</span></li>
+                                </ul>
+                            </div>
+                            <div class="row">
+                                <b class="w-100">Color</b>
+                                <ul id="colorList" class="list-unstyled">
+                                    <li th:each="color, iter: ${colors}">
+                                        <label class="customCheckboxContainer">
+                                            <input type="checkbox" onclick="filterCategories()">
+                                            <span th:class="${color.isTickBlack} ? 'black-tick checkmark' : 'white-tick checkmark'" th:style="'background: #' + ${color.rgb} + ';'"></span>
+                                        </label>
+                                        <span class="checkmarkText" th:text="${color.name}" style="margin-left: 18px;"></span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="row">
+                                <b class="w-100">Availability</b>
+                                <ul class="list-unstyled">
+                                    <li><input id="stockChk" type="checkbox" onclick="filterCategories()"><span class="ml-1">In stock</span></li>
+                                </ul>
+                            </div>
+                            <div class="row">
+                                <input id="priceLimits" type="hidden" th:min="${priceMin}" th:max="${priceMax}" />
+                                <b class="w-100">Price</b>
+                                <p><span class="bold">Range: </span><small><span id="priceMin">$20.00</span> - <span id="priceMax">$299.99</span></small></p>
+                                <div class="w-100" id="priceSlider"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="categoryToggle pt-2">
+                    <div data-toggle="collapse" class="h6 bg-dark text-white text-center py-2 m-0" href="#collapse2">
+                        <i class="fas fa-info-circle"></i>
+                        Information
+                    </div>
+                    <div id="collapse2" class="collapse col pt-1 show">
+                        <ul id="infoList" class="list-unstyled">
+                            <li>
+                                <a href="/about" class="ml-1 text-reset text-decoration-none">
+                                    <span class="fas fa-chevron-right fa-xs mr-1" style="vertical-align: middle;"></span>
+                                    <span style="vertical-align: middle;">About us</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/careers" class="ml-1 text-reset text-decoration-none">
+                                    <span class="fas fa-chevron-right fa-xs mr-1" style="vertical-align: middle;"></span>
+                                    <span style="vertical-align: middle;">Careers</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/help" class="ml-1 text-reset text-decoration-none">
+                                    <span class="fas fa-chevron-right fa-xs mr-1" style="vertical-align: middle;"></span>
+                                    <span style="vertical-align: middle;">Help</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/faq" class="ml-1 text-reset text-decoration-none">
+                                    <span class="fas fa-chevron-right fa-xs mr-1" style="vertical-align: middle;"></span>
+                                    <span style="vertical-align: middle;">FAQs</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="categoryToggle pt-2">
+                    <div data-toggle="collapse" class="h6 bg-dark text-white text-center py-2 m-0" href="#collapse4">
+                        <i class="fas fa-map-marked-alt"></i>
+                        Our stores
+                    </div>
+                    <div id="collapse4" class="collapse col show">
+                        <div class="row p-2 justify-content-center">
+                            <a href="/stores" title="">
+                                <img th:src="@{images/storeBtn.png}" class="img-responsive py-2" style="width: 100%; filter: brightness(40%);">
+                                <h5 class="text-white font-weight-bold" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">See stores</h5>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="categoryToggle pt-2">
+                    <div data-toggle="collapse" class="h6 bg-dark text-white text-center py-2 m-0" href="#collapse5">
+                        <i class="fas fa-exclamation"></i>
+                        Viewed products
+                    </div>
+                    <div id="collapse5" class="collapse col show">
+                        <div class="row p-2 justify-content-center">
+                            <div th:if="${recentProducts.isEmpty()}" class="jumbotron">
+                                <h4>No items</h4>
+                                <p>You haven't yet viewed any products</p>
+                            </div>
+                            <ul th:if="${!recentProducts.isEmpty()}" class="list-unstyled flex-grow-1">
+                                <li class="row py-1" th:each="product, stat: ${recentProducts}">
+                                    <div class="col">
+                                        <a th:href="'/product?id=' + ${product.getId()}">
+                                            <img th:src="@{data:image/jpeg;base64,{image}(image=${product.getMainImage().getImageBase64()})}" style="width: 100px; height: 100px;" />
+                                        </a>
+                                    </div>
+                                    <div class="col">
+                                        <p th:text="${product.getProductName()}"></p>
+                                        <a th:href="@{/product?id={id}(id=${product.getId()})}" class="btn btn-secondary btn-block">More</a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <div id="productPanel" class="mt-5">
+                <div th:replace="fragments/cardFragment :: cards"></div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

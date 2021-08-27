@@ -1,0 +1,26 @@
+<html xmlns:th="http://www.thymeleaf.org">
+    <body>
+        <nav th:fragment="nav" id="categoryNavBar" class="navbar navbar-expand-sm bg-dark navbar-dark sticky-top pb-0 px-0" style="top: 80px;">
+            <ul class="navbar-nav w-100" style="height: 48px;">
+                <li class="nav-item">
+                    <a class="nav-link pb-0 mb-3 px-0" id="navbarDropdown1" role="button" data-toggle="dropdown">
+                        <span class="ml-3">Women</span>
+                    </a>
+                    <div class="dropdown-menu mt-0 w-100 shadow" style="border-top-left-radius: 0px; border-top-right-radius: 0px;">
+                        <div class="row mx-2">
+                            <div class="col" th:each="grouping : ${structure}">
+                                <h5 th:text="${grouping.key}" class="dropdown-header">Category</h5>
+                                <a th:href="'catalog?category=' + ${grouping.key} + '&subcategory=' + ${subcategory}" th:each="subcategory, iter: ${grouping.value}" class="dropdown-item ml-3">
+                                    <div>
+                                        <span class="fas fa-chevron-right fa-xs mr-1" style="vertical-align: middle;"></span>
+                                        <span th:text="${subcategory}" style="vertical-align: middle;">Subcategory</span>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    </body>
+</html>

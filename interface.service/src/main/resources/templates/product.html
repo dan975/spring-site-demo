@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" th:include="layouts/commonLayout :: common-layout">
+<body>
+<div th:fragment="content">
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Name</th>
+                <td th:text="${product.getProductName()}"></td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td th:text="${product.getProductDescription()}"></td>
+            </tr>
+            <tr>
+                <th>Category</th>
+                <td th:text="${product.getGrouping().getCategory().getTitle()}"></td>
+            </tr>
+            <tr>
+                <th>Subcategory</th>
+                <td th:text="${product.getGrouping().getSubcategory().getTitle()}"></td>
+            </tr>
+            <tr>
+                <th>Images</th>
+                <td>
+                    <ul class="list-unstyled d-inline-flex pt-1">
+                        <li class="p-1" th:each="image, stat : ${product.getImages()}">
+                            <p th:text="${image.getColor()}"></p>
+                            <img th:src="@{data:image/jpeg;base64,{image}(image=${image.getImageBase64()})}"
+                                 style="width: 200px; border: 5px solid #555;" />
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

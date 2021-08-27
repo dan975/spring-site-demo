@@ -1,0 +1,53 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+    <div th:fragment="modal" class="modal modal-dialog-centered fade" id="myModal">
+        <div id="productModalSpinner" class="modal-dialog modal-dialog-centered justify-content-center" role="document">
+            <div class="border border-dark bg-dark p-2" style="border-radius: 10px;">
+                <div class="spinner-border text-white"></div>
+            </div>
+        </div>
+
+        <div id="productModal" class="modal-dialog modal-lg modal-dialog-scrollable" role="document" style="display: none;">
+            <div class="modal-content">
+                <div class="row" style="height: 400px;">
+                    <button type="button" class="close" data-dismiss="modal" style="position: absolute; top: 0px; right: 4px; z-index: 2;">&times;</button>
+                    <div class="col pl-5 py-3 d-flex flex-column">
+                        <div class="text-success mb-auto">
+                            <i class="fas fa-check fa-3x"></i>
+                            <h5>Product added to cart.</h5>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <img id='modalImage' style="width: 150px; height: 150px"></img>
+                            </div>
+                            <div class="flex-grow-1 align-self-end pb-3 pl-0" style="font-size: 14px;">
+                                <p id="name" class="mb-0">Product name</p>
+                                <p class="mb-0"><small id="subSelection">Product sub-selection</small></p>
+                                <p class="mb-0"><b>Quantity: </b><span id="quantity">x</span></p>
+                                <p class="mb-0"><b>Total: </b> <span id="totalCurrentProduct">$1000.10</span></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col pr-5 py-3 d-flex flex-column bg-light border-left">
+                        <h2 id="totalCountText">You have x products in your cart.</h2>
+                        <div>
+                            <b>Total products: </b><span id="totalProducts"></span>
+                        </div>
+                        <div>
+                            <b>Total shipping: </b><span id="totalShipping"></span>
+                        </div>
+                        <div class="mb-auto">
+                            <b>Total: </b><span id="total"></span>
+                        </div>
+                        <div class="pb-2 d-flex">
+                            <button type="button" class="btn btn-secondary m-1 col" data-dismiss="modal">Continue</button>
+                            <button type="button" class="btn btn-success m-1 col">Checkout</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+

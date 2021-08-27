@@ -1,0 +1,30 @@
+<html xmlns:th="http://www.thymeleaf.org">
+    <body>
+        <div th:fragment="cartMenu" class="align-self-center text-right">
+            <script type="text/javascript" th:src="@{/js/cartMenu.js}"></script>
+            <div id="cartDropdown" class="dropdown py-2">
+                <button id="cartButton" type="button" class="bg-secondary border border-secondary text-white dropdown-toggle col-md-6 rounded-top py-1 text-center" data-toggle="dropdown">
+                    <div style="display: inline-block; width: 95%" class="text-left">
+                        <i class="fas fa-shopping-cart mr-2"></i>
+                        <span class="mr-1">Cart</span>
+                        <span id="cartButtonCount" th:text="${cart.totalCount}"></span>
+                    </div>
+                </button>
+                <div id="cartMenu" class="dropdown-menu col-md-6 px-2 mt-0" style="border-radius: 0px 0px .25rem .25rem;">
+                    <h5 class="dropdown-header">Products in cart</h5>
+                    <div id="cartItemContainer">
+                        <div th:replace="fragments/cart/cartContent :: cartContent"></div>
+                    </div>
+                    <div class="dropdown-divider"></div>
+                    <div>
+                        <p class="d-flex"><span class="flex-grow-1">Shipping:</span><span id="cartShipping" th:text="'$' + ${cart.shippingCost}"></span></p>
+                        <p class="d-flex"><span class="flex-grow-1">Total products:</span><span id="cartTotal" th:text="'$' + ${cart.totalCost}"></span></p>
+                    </div>
+                    <div>
+                        <button id="checkoutBtn" class="btn btn-success btn-block" href="/checkout">Checkout</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

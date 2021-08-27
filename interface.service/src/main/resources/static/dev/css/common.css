@@ -1,0 +1,96 @@
+body {
+    padding-top: 80px;
+    padding-bottom: 40px;
+}
+
+#myModal {
+    margin-top:5000px;
+}
+
+#categoryNavBar .nav-item:hover .dropdown-menu {
+    display: block;
+    margin-top: 0;
+ }
+
+#categoryNavBar {
+    transition: margin 1s;
+}
+
+.category-nav-expand {
+    margin-left: -3rem!important;
+    margin-right: -3rem!important;
+    transition: margin 1s;
+}
+
+#infoList li:hover {
+    background-color: #f1f1f1;
+}
+
+.customCheckboxContainer {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.customCheckboxContainer input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.customCheckboxContainer .checkmark {
+  position: absolute;
+  top: 5px;
+  left: 0;
+  height: 16px;
+  width: 16px;
+  border: solid black;
+  border-width: 1px;
+}
+
+.customCheckboxContainer .checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.customCheckboxContainer input:checked ~ .checkmark:after {
+  display: block;
+}
+
+.customCheckboxContainer .checkmark.black-tick:after {
+  left: 5px;
+  top: 1px;
+  width: 5px;
+  height: 10px;
+  border: solid black;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+.customCheckboxContainer .checkmark.white-tick:after {
+  left: 5px;
+  top: 1px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+.customCheckboxContainer .checkmarkText {
+  margin-left: 18px;
+}

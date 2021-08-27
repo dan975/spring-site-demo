@@ -1,0 +1,6 @@
+.idea
+dbProperties.properties
+secret.properties
+mysql_password.txt
+mysql_user.txt
+google_api_key.txt

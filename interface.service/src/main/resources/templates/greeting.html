@@ -1,0 +1,11 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" th:include="layouts/commonLayout :: common-layout">
+<body>
+    <div th:fragment="content">
+        <h2>
+            <span th:text="'Hello, ' + ${message}"></span>
+        </h2>
+        <a href="/logout">Logout</a>
+    </div>
+</body>
+</html>

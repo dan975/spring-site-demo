@@ -1,0 +1,16 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" th:include="layouts/commonLayout :: common-layout">
+<body>
+    <div th:fragment="content">
+        <h1 th:text="'Profile of ' + ${username}"></h1>
+        <h2>Recently viewed items:</h2>
+        <div th:if="${products.isEmpty()}" class="jumbotron m-5">
+            <h4>No items</h4>
+            <p>You haven't yet viewed any products</p>
+        </div>
+        <div th:if="${!products.isEmpty()}">
+            <div th:replace="fragments/cardFragment :: cards"></div>
+        </div>
+    </div>
+</body>
+</html>

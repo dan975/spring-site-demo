@@ -1,0 +1,90 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+    <div th:fragment="cards">
+        <style>
+            .card .image-container {
+                position: relative;
+                text-align: center;
+            }
+
+            .card .hover-node {
+                display: none;
+            }
+
+            .card:hover .hover-node {
+                display: block;
+            }
+
+            .card:hover .non-hover-node {
+                display: none;
+            }
+
+            .card .price-node {
+                position: absolute;
+                bottom: 0px;
+                left: 50%;
+                transform: translate(-50%, 0%);
+                width: 250px;
+                padding-bottom: 10px;
+                padding-top: 10px;
+                opacity: 0.95;
+            }
+
+            @media (max-width: 800px) {
+                .card .hover-node {
+                    display: block;
+                }
+
+                .card .non-hover-node {
+                    display: none;
+                }
+            }
+        </style>
+        <script>
+            $(document).ready(function() {
+                $( ".card" ).hover(
+                  function() {
+                    $(this).addClass('shadow-lg').css('cursor', 'pointer');
+                  }, function() {
+                    $(this).removeClass('shadow-lg');
+                  }
+                );
+            });
+        </script>
+
+        <div class="d-flex justify-content-center">
+            <div th:if="${products == null || products.isEmpty()}">
+                <div class="jumbotron text-center">
+                    <h2>There are no products matching your search criteria</h2>
+                    <p>Please try searching with different input or checkout some of our other popular products <a href="/">here</a>.</p>
+                </div>
+                <div th:replace="fragments/top :: search-input"></div>
+            </div>
+            <div th:if="${products != null && !products.isEmpty()}" class="row col-10">
+                <div th:each="product, stat : ${products}" class="d-flex justify-content-center col" style="padding-bottom: 25px;">
+                    <div class="card" style="height: 400px; width: 250px;">
+                        <div class="image-container">
+                            <img class="card-img-top" th:src="@{data:image/jpeg;base64,{image}(image=${product.getMainImage().getImageBase64()})}"
+                                 alt="Card image" style="width:100%">
+                            <strong th:text="'$' + ${product.getPrice()}" class="bg-dark text-white hover-node price-node">$17.32</strong>
+                        </div>
+                        <div class="card-body d-flex flex-column">
+                            <h4 th:text="${product.getProductName()}" class="card-title">T-shirt</h4>
+                            <div class="mt-auto">
+                                <div class="hover-node">
+                                    <a href="#" class="btn btn-success" data-toggle="modal" data-target="#myModal" th:onclick="'cardAdd(' + ${product.getId()} + ')'">Add</a>
+                                    <a th:href="@{/product?id={id}(id=${product.getId()})}" class="btn btn-secondary">More</a>
+                                </div>
+                                <div class="non-hover-node">
+                                    <p class="text-center card-text font-weight-bold" th:text="'$' + ${product.getPrice()}">£11.11</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div th:replace="fragments/productModal :: modal">Modal</div>
+        </div>
+    </div>
+</body>
+</html>

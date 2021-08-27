@@ -1,0 +1,37 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" th:include="layouts/commonLayout :: common-layout">
+    <body>
+        <div th:fragment="content">
+            <form name="f" th:action="@{/login}" method="post" class="form-horizontal">
+                <fieldset>
+                    <legend>Please Login</legend>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="username">Username:</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="username" placeholder="Enter username" name="username">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="password">Password:</label>
+                        <div class="col-sm-10">
+                            <input type="password" class="form-control" id="password" placeholder="Enter password" name="password">
+                        </div>
+                    </div>
+                    <div class="form-actions form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button type="submit" class="btn btn-primary">Log in</button>
+                        </div>
+                    </div>
+                    <div th:if="${param.error}" class="alert alert-danger alert-dismissible">
+                        Invalid username and password.
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    </div>
+                    <div th:if="${param.logout}" class="alert alert-success alert-dismissible">
+                        You have been logged out.
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </body>
+</html>
