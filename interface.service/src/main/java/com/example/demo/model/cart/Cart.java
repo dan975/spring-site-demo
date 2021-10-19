@@ -9,6 +9,7 @@ import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.WebApplicationContext;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,6 +18,7 @@ import java.util.List;
 @Scope(value = WebApplicationContext.SCOPE_SESSION,
         proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class Cart {
+    private static final DecimalFormat PRICE_FORMAT = new DecimalFormat("#.##");
 
     @Getter
     private List<CartItem> cartItems = new ArrayList<>();
@@ -71,9 +73,12 @@ public class Cart {
                 .map(CartItem::getCount)
                 .reduce(0, Integer::sum)
                 * shippingCostItem;
+
         this.totalCost = cartItems.stream()
                 .map(c -> c.getPrice() * c.getCount())
                 .reduce(0.0, Double::sum);
+        this.totalCost = Double.parseDouble(PRICE_FORMAT.format(this.totalCost));
+
         this.totalCount = cartItems.stream()
                 .map(CartItem::getCount)
                 .reduce(0, Integer::sum);
