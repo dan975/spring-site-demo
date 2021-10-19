@@ -74,10 +74,11 @@ function updateCart(isExpanded) {
         })
         .then(response => response.text())
         .then(html => {
-            console.log("here");
             $('#cart').html(html);
             if (isExpanded) {
                 $('#cartButton').click();
+                $('#cartDropdown').removeClass('dropdown');
+                $('#cartDropdown').addClass('dropup');
             }
         });
 
@@ -223,5 +224,9 @@ function filterCategories() {
     .then(html => {
         changeEnabled(false);
         $('#productPanel').html(html);
+
+        $('#myModal').on('show.bs.modal', function(e) {
+            $('#myModal').css("margin-top","0px")
+        });
     });
 }
