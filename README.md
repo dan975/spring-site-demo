@@ -12,6 +12,12 @@ A demo video of the application can be found at:
 https://www.youtube.com/watch?v=ZXPKctgTUAc
 
 ## Docker
+
+### Setup
+
+1. add `google_api_key.txt` file with google api key for google maps utilization.
+2. add `mysql_password.txt` and `mysql_user.txt` with credentials for database connections (all dbs use same credentials).
+
 ### Docker compose
 Start:
 
