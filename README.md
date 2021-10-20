@@ -42,6 +42,8 @@ or
 
     docker stack deploy -c docker-compose.yml -c docker-compose.override.yml store
 
+Swarm mode takes around 2-3 minutes to start up. Check the state of the services with `docker service ls`.
+
 Shutdown:
 
     docker stack rm store
