@@ -9,7 +9,6 @@
                 <div class="flex-grow-1 pl-1">
                     <div><span th:text="${cartItem.count}">0</span> x <a th:href="'/product?id=' + ${cartItem.id}" th:text="${cartItem.name}">Name</a></div>
                     <div><span th:text="${cartItem.size}">Medium</span></div>
-                    <!--                TODO change currency formatting approach -->
                     <span th:inline="text">$[[${#numbers.formatDecimal(cartItem.price, 0, 'COMMA', 2, 'POINT')}]]</span>
 
                 </div>
